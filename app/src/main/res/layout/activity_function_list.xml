@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.lehand.wechat.ui.FunctionListActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_monkey_king" />
+
+    <Button
+        android:id="@+id/custom_with_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="通用底部导航" />
+
+    <Button
+        android:id="@+id/flowing_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FlowingDrawer" />
+</LinearLayout>
