@@ -1,1 +1,1 @@
-include ':app', ':imui'
+include ':app', ':imui', ':tools'

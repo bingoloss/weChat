@@ -44,4 +44,5 @@ dependencies {
     compile 'net.idik:slimadapter:2.1.2'
     implementation project(':imui')
     compile 'com.hyphenate:hyphenate-sdk:3.3.0'
+    implementation project(':tools')
 }

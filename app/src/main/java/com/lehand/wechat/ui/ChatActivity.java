@@ -1,9 +1,12 @@
 package com.lehand.wechat.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -21,9 +24,16 @@ import com.lehand.imui.util.KeyboardWatcher;
 import com.lehand.imui.widget.EmotionInputDetector;
 import com.lehand.imui.widget.NoScrollViewPager;
 import com.lehand.imui.widget.StateButton;
+import com.lehand.tools.overscroll.IOverScrollDecor;
+import com.lehand.tools.overscroll.IOverScrollUpdateListener;
+import com.lehand.tools.overscroll.OverScrollDecoratorHelper;
+import com.lehand.tools.overscroll.OverScrollViewUtils;
+import com.lehand.tools.overscroll.VerticalOverScrollBounceEffectDecorator;
+import com.lehand.tools.overscroll.adapters.RecyclerViewOverScrollDecorAdapter;
 import com.lehand.wechat.R;
 import com.lehand.wechat.base.BaseActivity;
 import com.lehand.wechat.chat.ChatHelper;
+import com.lehand.wechat.utils.LogUtils;
 
 import net.idik.lib.slimadapter.SlimAdapter;
 import net.idik.lib.slimadapter.SlimInjector;
@@ -63,7 +73,7 @@ public class ChatActivity extends BaseActivity {
     @OnClick(R.id.huanxin)
     void hunaxinClick() {
         Toast.makeText(mContext, "hhaha", Toast.LENGTH_SHORT).show();
-        if (ChatHelper.getInstance().isLogin()){
+        if (ChatHelper.getInstance().isLogin()) {
             EMClient.getInstance().updateCurrentUserNick("bingo");
         }
         new Thread(new Runnable() {
@@ -98,7 +108,6 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void initView() {
         initKeyBoardWatcher();
-
         fragments = new ArrayList<>();
         chatEmotionFragment = new ChatEmotionFragment();
         fragments.add(chatEmotionFragment);
@@ -143,6 +152,8 @@ public class ChatActivity extends BaseActivity {
                     }
                 }).attachTo(chatList);
         chatAdapter.updateData(getMessageList());
+        //设置弹性回弹
+        OverScrollViewUtils.setUpRecyclerView(chatList);
     }
 
     public List<String> getMessageList() {

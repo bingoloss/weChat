@@ -61,6 +61,8 @@ public class ChatHelper {
         //options.setAutoTransferMessageAttachments(true);
         // 是否自动下载附件类消息的缩略图等，默认为 true 这里和上边这个参数相关联
         //options.setAutoDownloadThumbnail(true);
+        //设置自动登录
+        options.setAutoLogin(false);
         //初始化
         EMClient.getInstance().init(context, options);
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
@@ -144,6 +146,7 @@ public class ChatHelper {
      * 退出登录，异步方法;同步方法直接调用:EMClient.getInstance().logout(true);
      */
     public void logout() {
+        //如果集成了第三方的推送功能，那么方法中的第一个参数需要设置为true，目的是解绑设备token，否则的话可能出现退出之后依然能收到推送的情况。
         EMClient.getInstance().logout(true, new EMCallBack() {
 
             @Override
