@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--自定义DrawableLeft等相关的大小-->
+    <declare-styleable name="drawableText">
+        <attr name="leftDrawable" format="reference|integer" />
+        <attr name="rightDrawable" format="reference|integer" />
+        <attr name="topDrawable" format="reference|integer" />
+        <attr name="bottomDrawable" format="reference|integer" />
+        <attr name="drawableWidth" format="dimension" />
+        <attr name="drawableHeight" format="dimension" />
+    </declare-styleable>
+    <!--带清除按钮的EditText-->
+    <declare-styleable name="PowerfulEditText">
+        <!--图片资源-->
+        <attr name="clearDrawable" format="reference" />
+        <attr name="visibleDrawable" format="reference" />
+        <attr name="invisibleDrawable" format="reference" />
+        <!--按钮宽度大小-->
+        <attr name="BtnWidth" format="dimension" />
+        <!--按钮间距大小-->
+        <attr name="BtnSpacing" format="dimension" />
+        <!--边框颜色和样式-->
+        <attr name="styleColor" format="color" />
+        <attr name="borderStyle" format="string" />
+    </declare-styleable>
+    <!--会话页面的侧滑-->
+    <declare-styleable name="SwipeMenuLayout">
+        <!-- format="reference"意为参考某一资源ID -->
+        <attr name="right_id" format="reference" />
+    </declare-styleable>
+</resources>

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -21,6 +21,12 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    //greenDao配置，升级和修改表字段需要增加schemaVersion
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.lehand.wechat.chat.gen'
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
@@ -31,6 +37,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.android.support:design:26+'
+    implementation project(':imui')
+    implementation project(':tools')
     //注解
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
@@ -42,7 +50,11 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     //recyclerView设配器
     compile 'net.idik:slimadapter:2.1.2'
-    implementation project(':imui')
+    //环信SDK
     compile 'com.hyphenate:hyphenate-sdk:3.3.0'
-    implementation project(':tools')
+    //数据库
+    compile 'org.greenrobot:greendao:3.0.1'
+    compile 'org.greenrobot:greendao-generator:3.0.0'
+    //recyclerView 适配器
+    compile 'com.github.baserecycleradapter:library:1.0.9'
 }

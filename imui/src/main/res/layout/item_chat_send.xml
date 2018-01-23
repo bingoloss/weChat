@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/chat_item_header">
 
-            <com.rance.chatui.widget.BubbleImageView
+            <com.lehand.imui.widget.BubbleImageView
                 android:id="@+id/chat_item_content_image"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"

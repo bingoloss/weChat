@@ -34,7 +34,7 @@ import com.lehand.imui.util.Utils;
  * 输入框管理类
  */
 public class EmotionInputDetector {
-
+    private final String TAG = EmotionInputDetector.class.getCanonicalName();
     private static final String SHARE_PREFERENCE_NAME = "com.dss886.emotioninputdetector";
     private static final String SHARE_PREFERENCE_TAG = "soft_input_height";
 
@@ -190,6 +190,9 @@ public class EmotionInputDetector {
                /* MessageInfo messageInfo = new MessageInfo();
                 messageInfo.setContent(mEditText.getText().toString());
                 EventBus.getDefault().post(messageInfo);*/
+               if (listener!=null){
+                   listener.onSendText(mEditText.getText().toString());
+               }
                 toast("发送");
                 mEditText.setText("");
             }
@@ -419,5 +422,18 @@ public class EmotionInputDetector {
         } else {
             return 0;
         }
+    }
+
+    /**
+     *  发送数据的接口，将数据抛出去
+     */
+    private SendContentListener listener;
+
+    public void setListener(SendContentListener listener) {
+        this.listener = listener;
+    }
+
+    public interface SendContentListener {
+        void onSendText(String content);
     }
 }

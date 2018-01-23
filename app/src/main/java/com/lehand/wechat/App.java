@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 import com.lehand.wechat.chat.ChatHelper;
+import com.lehand.wechat.chat.GreenDaoManager;
 import com.lehand.wechat.utils.ExceptionCrashHandler;
 import com.lehand.wechat.utils.LogUtils;
 
@@ -37,6 +38,7 @@ public class App extends Application {
         }
         //环信SDK初始化
         ChatHelper.getInstance().init(this);
+        GreenDaoManager.getInstance().init(this);
     }
 
     /**

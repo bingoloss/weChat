@@ -20,6 +20,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.lehand.wechat.R;
 import com.lehand.wechat.base.BaseActivity;
+import com.lehand.wechat.chat.ChatHelper;
 import com.lehand.wechat.fragment.ChatListFragment;
 import com.lehand.wechat.fragment.CloudFragment;
 import com.lehand.wechat.fragment.SettingFragment;
@@ -63,9 +64,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initView() {
+        mTitleTv.setText(mTitle[currentTabIndex]);
         iniLeftNavigation();
         initBottomNavigationBar();
         //requestPermission(new String[]{Manifest.permission.CAMERA});
+        LogUtils.e("当前登录账号："+ChatHelper.getInstance().getCurrentLoginUser());
     }
 
     @Override

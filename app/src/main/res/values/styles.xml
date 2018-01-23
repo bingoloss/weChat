@@ -28,4 +28,18 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+    <!--PowerfulEditText 的风格-->
+    <style name="EditTextTheme">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#6c6868</item>
+        <item name="android:textColorHint">#999999</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+    </style>
+    <!--全屏线的风格-->
+    <style name="LineTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/line</item>
+    </style>
 </resources>

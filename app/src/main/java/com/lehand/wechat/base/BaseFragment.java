@@ -66,6 +66,21 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
+     * 跳转到指定的Activity
+     *
+     * @param clazz
+     * @param isFinish 是否销毁当前页面
+     */
+    protected void moveTo(Class<?> clazz, boolean isFinish, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), clazz);
+        intent.putExtra("data",bundle);
+        startActivity(intent);
+        if (isFinish) {
+            this.getActivity().finish();
+        }
+    }
+
+    /**
      * Toast
      *
      * @param msg

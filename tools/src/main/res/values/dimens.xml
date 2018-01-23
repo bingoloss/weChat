@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--PowerfullEditText-->
+    <dimen name="btn_edittext_padding">5dp</dimen>
+    <dimen name="btn_edittext_width">24dp</dimen>
+</resources>

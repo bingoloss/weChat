@@ -17,6 +17,9 @@ import com.hyphenate.chat.EMGroupManager;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.exceptions.HyphenateException;
+import com.lehand.tools.utils.AppManager;
+import com.lehand.tools.widget.toast.Toasting;
+import com.lehand.wechat.ui.LoginActivity;
 import com.lehand.wechat.ui.MainActivity;
 import com.lehand.wechat.utils.LogUtils;
 
@@ -81,6 +84,23 @@ public class ChatHelper {
     }
 
     /**
+     * 是否登录成功过
+     * @return
+     */
+    public boolean isLoggedIn() {
+        return EMClient.getInstance().isLoggedInBefore();
+    }
+
+    /**
+     * 获取当前登录的用户hxid
+     *
+     * @return
+     */
+    public String getCurrentLoginUser() {
+        return EMClient.getInstance().getCurrentUser();
+    }
+
+    /**
      * 判断是否登录过
      *
      * @return
@@ -99,18 +119,24 @@ public class ChatHelper {
         //注册失败会抛出HyphenateException
         try {
             EMClient.getInstance().createAccount(userName, password);//同步方法
+            GreenDaoManager.getInstance().addUser(userName);
         } catch (HyphenateException e) {
             int errorCode = e.getErrorCode();
             if (errorCode == EMError.NETWORK_ERROR) {
                 LogUtils.e("网络异常，请检查网络！");
+                //Toasting.showAnimToast(mContext,"网络异常，请检查网络！");
             } else if (errorCode == EMError.USER_ALREADY_EXIST) {
                 LogUtils.e("用户已存在！！");
+                //Toasting.showAnimToast(mContext,"用户已存在！！");
             } else if (errorCode == EMError.USER_AUTHENTICATION_FAILED) {
                 LogUtils.e("注册失败，无权限！");
+                //Toasting.showAnimToast(mContext,"注册失败，无权限！");
             } else if (errorCode == EMError.USER_ILLEGAL_ARGUMENT) {
                 LogUtils.e("用户名不合法！");
+                //Toasting.showAnimToast(mContext,"用户名不合法！");
             } else {
                 LogUtils.e("注册失败！errorCode = " + errorCode);
+                //Toasting.showAnimToast(mContext,"注册失败");
             }
         }
     }
@@ -137,7 +163,7 @@ public class ChatHelper {
 
             @Override
             public void onError(int code, String message) {
-                LogUtils.e("登录聊天服务器失败！");
+                LogUtils.e("登录聊天服务器失败！ code = " + code);
             }
         });
     }
@@ -167,5 +193,26 @@ public class ChatHelper {
 
             }
         });
+    }
+
+    /**
+     * 发送一条文本消息
+     */
+    public void sendTextMessage(String content, String toChatUsername, EMMessage.ChatType chatType) {
+        //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
+        EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+        //如果是群聊，设置chattype，默认是单聊
+        if (chatType == EMMessage.ChatType.GroupChat) {
+            message.setChatType(EMMessage.ChatType.GroupChat);
+        }
+        //发送消息
+        EMClient.getInstance().chatManager().sendMessage(message);
+    }
+
+    /**
+     * 发送一条文本消息
+     */
+    public void sendTextMessage(String content, String toChatUsername) {
+        sendTextMessage(content, toChatUsername, EMMessage.ChatType.Chat);
     }
 }

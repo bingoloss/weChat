@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.lehand.tools.utils.AppManager;
 import com.lehand.wechat.R;
 import com.lehand.wechat.utils.CheckPermissionsUtil;
 import com.lehand.wechat.utils.StatusBarUtil;
@@ -153,6 +154,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     //==================================↑ 权限处理 end ↑=========================================//
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AppManager.getInstance().addActivity(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        hideKeyboard();
+        // 极端情况下，系统会杀死APP进程，并不执行onDestroy()，
+        // 因此需要使用onStop()来释放资源，从而避免内存泄漏。
+        AppManager.getInstance().removeActivity(this);
+    }
     @Override
     protected void onDestroy() {
         mUnbinder.unbind();

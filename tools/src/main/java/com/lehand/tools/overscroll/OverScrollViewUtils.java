@@ -2,6 +2,9 @@ package com.lehand.tools.overscroll;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.ScaleGestureDetector;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ListView;
@@ -12,6 +15,7 @@ import com.lehand.tools.overscroll.adapters.RecyclerViewOverScrollDecorAdapter;
 /**
  * Created by bingo on 2018/1/21.
  * 操作类
+ * 注意：该工具与刷新控件有冲突，不适合同时使用
  */
 
 public class OverScrollViewUtils {
@@ -89,5 +93,18 @@ public class OverScrollViewUtils {
      */
     public static void setUpScrollView(HorizontalScrollView scrollView) {
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
+    }
+
+    /**
+     * View
+     *
+     * @param view
+     */
+    public static void setUpView(View view, int orientation) {
+        if (OverScrollDecoratorHelper.ORIENTATION_VERTICAL == orientation) {
+            OverScrollDecoratorHelper.setUpStaticOverScroll(view, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
+        } else if (OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL == orientation) {
+            OverScrollDecoratorHelper.setUpStaticOverScroll(view, OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL);
+        }
     }
 }
